@@ -13,7 +13,10 @@ import progavanzada.model.Estudiante;
 @Controller
 public class HomeController {
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
-	public String HomePage() {
+	public String HomePage(Model model) {
+		List<Estudiante> estudiantes=listaEstudiantes();
+
+		model.addAttribute("estudiantes",estudiantes);
 		return "home";
 	}
 	@RequestMapping(value="/detalle")
@@ -26,11 +29,11 @@ public class HomeController {
 		modelo.addAttribute("salario", salario);
 		return "detalle";
 	}
-	
+
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String Principal(Model model) {
 		List<Estudiante> estudiantes=listaEstudiantes();
-		
+
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
 	}
