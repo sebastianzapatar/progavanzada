@@ -9,4 +9,5 @@ public interface IPersonaService {
 	Persona encontrarporId(int id);
 	List<Persona> listarpornombre(String nombre);
 	void guardar(Persona persona);
+	void eliminar(int id);
 }

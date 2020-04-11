@@ -41,6 +41,7 @@ Seguimos en el fin del mundo</h1>
 	<th>Nombre</th>
 	<th>Apellido</th>
 	<th>Telefono</th>
+	<th>Acciones</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -50,6 +51,12 @@ Seguimos en el fin del mundo</h1>
 		<td>${estudiante.nombre }</td>
 		<td>${estudiante.apellido}</td>
 		<td>${estudiante.telefono}</td>
+		<td> <a href="edit/${estudiante.id}" class="btn btn-success btn-sm" 
+	role="button" title="Edit">
+	<span class="glyphicon glyphicon-pencil"></span>editar</a>
+	<a href="eliminar/${estudiante.id}" onclick='return confirm("¿Estas seguro?")' 
+    class="btn btn-danger btn-sm" role="button" title="Eliminar">
+    <span class="glyphicon glyphicon-trash"></span>eliminar</a></td>
 		</tr>
 	</c:forEach>
 	</tbody>

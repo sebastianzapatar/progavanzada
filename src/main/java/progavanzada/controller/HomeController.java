@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import progavanzada.model.Estudiante;
 import progavanzada.model.Persona;
 import progavanzada.service.IPersonaService;
+
+
 
 
 
@@ -58,12 +61,40 @@ public class HomeController {
 	@PostMapping(value="/guardar")
 	public String guardar(@ModelAttribute Persona persona, BindingResult result, Model model)
 	{
-		
+
 		personas.guardar(persona);
 		List<Persona> estudiantes=personas.listarpersonas();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home"; 
+	}
+	@RequestMapping(value="eliminar/{id}")
+	public String eliminar(@PathVariable("id") int id,Model model) {
+		personas.eliminar(id);
+
+		List<Persona> estudiantes=personas.listarpersonas();
+
+		model.addAttribute("estudiantes",estudiantes);
+		return "redirect:/home";
+	}
+
+	@RequestMapping(value="/edit/{id}")
+	public String editar(@PathVariable("id") int id,Model model) {
+		Persona eldato=personas.encontrarporId(id);
+		model.addAttribute("estudiante",eldato);
+		return "editar";
+	}
+	@PostMapping(value="/guardar1")
+	public String guardar(Model model, @RequestParam("id") int id, @RequestParam("telefono") 
+	int telefono)
+	{
+		Persona eldato=personas.encontrarporId(id);
+		eldato.setTelefono(telefono);
+		personas.guardar(eldato);
+		List<Persona> estudiantes=personas.listarpersonas();
+
+		model.addAttribute("estudiantes",estudiantes);
+		return "home";
 	}
 	public static List<Estudiante> listaEstudiantes(){
 		List<Estudiante> estudiantes=new ArrayList<Estudiante>();

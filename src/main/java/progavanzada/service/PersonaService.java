@@ -36,4 +36,12 @@ public class PersonaService implements IPersonaService {
 		perso.save(persona);
 	}
 
+	@Override
+	public void eliminar(int id) {
+		// TODO Auto-generated method stub
+		perso.deleteById(id);
+	}
+
+	
+
 }
