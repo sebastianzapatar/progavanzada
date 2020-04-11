@@ -1,38 +1,52 @@
 package progavanzada.service;
 
+
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import progavanzada.model.Persona;
 import progavanzada.repository.PersonaRepository;
-
-
 @Service
 public class PersonaService implements IPersonaService {
-	@Autowired
-	private static PersonaRepository perso;
-	@Override
-	public void insertarPersona(Persona persona) {
-		// TODO Auto-generated method stub
-		perso.save(persona);
-	}
 
-	@Override
-	public List<Persona> ListarTodos() {
-		// TODO Auto-generated method stub
 	
-		return perso.findAll();
+	@Autowired
+	private PersonaRepository repo;
+	@Override
+	public List<Persona> personalistar() {
+		// TODO Auto-generated method stub
+		List<Persona> w=repo.findAll();
+		return w;
 	}
 
 	@Override
-	public Optional buscarporId(int id) {
+	public Persona encontrarId(int id) {
 		// TODO Auto-generated method stub
-		Optional<Persona> o=perso.findById(id);
-		
-		return o;
+		Persona k=repo.findById(id);
+		return k;
+	}
+
+	@Override
+	public void eliminar(int id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+
+	}
+
+	@Override
+	public void guardar(Persona e) {
+		// TODO Auto-generated method stub
+		repo.save(e);
+
+	}
+
+	@Override
+	public void actualizar(Persona e) {
+		// TODO Auto-generated method stub
+		repo.save(e);
+
 	}
 
 }

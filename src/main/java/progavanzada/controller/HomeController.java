@@ -13,13 +13,14 @@ import progavanzada.model.Estudiante;
 import progavanzada.model.Persona;
 import progavanzada.service.IPersonaService;
 
+
 @Controller
 public class HomeController {
 	@Autowired
-	private static IPersonaService perso;
+	private IPersonaService operaciones;
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String HomePage(Model model) {
-		List<Persona> estudiantes=perso.ListarTodos();
+		List<Persona> estudiantes=operaciones.personalistar();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
@@ -37,7 +38,7 @@ public class HomeController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String Principal(Model model) {
-		List<Persona> estudiantes=perso.ListarTodos();
+		List<Persona> estudiantes=operaciones.personalistar();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";

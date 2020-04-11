@@ -3,9 +3,15 @@ import java.util.List;
 import java.util.Optional;
 
 import progavanzada.model.Persona;
+
+import java.util.List;
+
+
+
 public interface IPersonaService {
-	void insertarPersona(Persona persona);
-	List<Persona> ListarTodos();
-	Optional buscarporId(int id);
-	
+	List<Persona> personalistar();
+	Persona encontrarId(int id);
+	void eliminar(int id);
+	void guardar(Persona e);
+	void actualizar(Persona e);
 }
