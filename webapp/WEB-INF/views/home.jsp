@@ -37,19 +37,19 @@ Seguimos en el fin del mundo</h1>
 	<table border="1" id="myTable">
 	<thead>
 	<tr>
+	<th>Id</th>
 	<th>Nombre</th>
-	<th>Apellidos</th>
+	<th>Apellido</th>
 	<th>Telefono</th>
-	<th>id</th>
 	</tr>
 	</thead>
 	<tbody>
 	<c:forEach items="${estudiantes }" var="estudiante">
 		<tr>
-		<td>${estudiante.nombre}</td>
-		<td>${estudiante.apellido }</td>
-		<td>${estudiante.telefono}</td>
 		<td>${estudiante.id}</td>
+		<td>${estudiante.nombre }</td>
+		<td>${estudiante.apellido}</td>
+		<td>${estudiante.telefono}</td>
 		</tr>
 	</c:forEach>
 	</tbody>

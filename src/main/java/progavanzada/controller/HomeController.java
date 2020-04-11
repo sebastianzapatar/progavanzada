@@ -3,27 +3,39 @@ package progavanzada.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import progavanzada.model.Estudiante;
 import progavanzada.model.Persona;
 import progavanzada.service.IPersonaService;
 
 
+
 @Controller
 public class HomeController {
 	@Autowired
-	private IPersonaService operaciones;
+	private IPersonaService personas;
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String HomePage(Model model) {
-		List<Persona> estudiantes=operaciones.personalistar();
+		List<Persona> estudiantes=personas.listarpersonas();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
+	}
+	@RequestMapping(value="/insertarpersona")
+	public String insertar() {
+		return "insertarpersona";
 	}
 	@RequestMapping(value="/detalle")
 	public String DatosProfe(Model modelo) {
@@ -38,10 +50,20 @@ public class HomeController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String Principal(Model model) {
-		List<Persona> estudiantes=operaciones.personalistar();
+		List<Persona> estudiantes=personas.listarpersonas();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
+	}
+	@PostMapping(value="/guardar")
+	public String guardar(@ModelAttribute Persona persona, BindingResult result, Model model)
+	{
+		
+		personas.guardar(persona);
+		List<Persona> estudiantes=personas.listarpersonas();
+
+		model.addAttribute("estudiantes",estudiantes);
+		return "home"; 
 	}
 	public static List<Estudiante> listaEstudiantes(){
 		List<Estudiante> estudiantes=new ArrayList<Estudiante>();

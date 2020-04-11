@@ -1,6 +1,5 @@
 package progavanzada.service;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,45 +7,33 @@ import org.springframework.stereotype.Service;
 
 import progavanzada.model.Persona;
 import progavanzada.repository.PersonaRepository;
+
 @Service
 public class PersonaService implements IPersonaService {
-
-	
 	@Autowired
-	private PersonaRepository repo;
+	PersonaRepository perso;
 	@Override
-	public List<Persona> personalistar() {
+	public List<Persona> listarpersonas() {
 		// TODO Auto-generated method stub
-		List<Persona> w=repo.findAll();
-		return w;
+		return perso.findAll();
 	}
 
 	@Override
-	public Persona encontrarId(int id) {
+	public Persona encontrarporId(int id) {
 		// TODO Auto-generated method stub
-		Persona k=repo.findById(id);
-		return k;
+		return perso.findById(id);
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public List<Persona> listarpornombre(String nombre) {
 		// TODO Auto-generated method stub
-		repo.deleteById(id);
-
+		return perso.findByNombre(nombre);
 	}
 
 	@Override
-	public void guardar(Persona e) {
+	public void guardar(Persona persona) {
 		// TODO Auto-generated method stub
-		repo.save(e);
-
-	}
-
-	@Override
-	public void actualizar(Persona e) {
-		// TODO Auto-generated method stub
-		repo.save(e);
-
+		perso.save(persona);
 	}
 
 }
