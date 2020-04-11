@@ -3,18 +3,23 @@ package progavanzada.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import progavanzada.model.Estudiante;
+import progavanzada.model.Persona;
+import progavanzada.service.IPersonaService;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private static IPersonaService perso;
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String HomePage(Model model) {
-		List<Estudiante> estudiantes=listaEstudiantes();
+		List<Persona> estudiantes=perso.ListarTodos();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
@@ -32,7 +37,7 @@ public class HomeController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String Principal(Model model) {
-		List<Estudiante> estudiantes=listaEstudiantes();
+		List<Persona> estudiantes=perso.ListarTodos();
 
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";

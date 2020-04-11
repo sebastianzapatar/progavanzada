@@ -39,8 +39,8 @@ Seguimos en el fin del mundo</h1>
 	<tr>
 	<th>Nombre</th>
 	<th>Apellidos</th>
-	<th>Dirección</th>
-	<th>Cédula</th>
+	<th>Telefono</th>
+	<th>id</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -48,8 +48,8 @@ Seguimos en el fin del mundo</h1>
 		<tr>
 		<td>${estudiante.nombre}</td>
 		<td>${estudiante.apellido }</td>
-		<td>${estudiante.direccion}</td>
-		<td>${estudiante.cedula}</td>
+		<td>${estudiante.telefono}</td>
+		<td>${estudiante.id}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
