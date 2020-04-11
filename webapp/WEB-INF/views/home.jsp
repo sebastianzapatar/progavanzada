@@ -41,7 +41,9 @@ Seguimos en el fin del mundo</h1>
 	<th>Nombre</th>
 	<th>Apellido</th>
 	<th>Telefono</th>
+	<th>Imagen</th>
 	<th>Acciones</th>
+	
 	</tr>
 	</thead>
 	<tbody>
@@ -51,6 +53,11 @@ Seguimos en el fin del mundo</h1>
 		<td>${estudiante.nombre }</td>
 		<td>${estudiante.apellido}</td>
 		<td>${estudiante.telefono}</td>
+		<td>
+		<img src="resources/images/${estudiante.imagen}"
+     width="80"
+     height="80">
+		</td>
 		<td> <a href="edit/${estudiante.id}" class="btn btn-success btn-sm" 
 	role="button" title="Edit">
 	<span class="glyphicon glyphicon-pencil"></span>editar</a>

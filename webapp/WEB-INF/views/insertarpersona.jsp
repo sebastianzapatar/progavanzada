@@ -37,7 +37,7 @@
 </head>
 <body>
 <jsp:include page="plantillas/menu.jsp"></jsp:include>
-	<form action="guardar" method="post">
+	<form action="guardar" method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleInputText1">id</label> <input type="number"
 				class="form-control" id="id" name="id" placeholder="id" required>
@@ -57,7 +57,10 @@
 				class="form-control" id="telefono" name="telefono"
 				placeholder="telefono" required>
 		</div>
-
+		<div class="form-group">
+			<label for="exampleInputText1">Imagen</label> <input type="file"
+				class="form-control" id="imagen" name="imagen">
+		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 		<a href="/progavanzada/home" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
 	</form>

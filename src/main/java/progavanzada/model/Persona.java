@@ -14,7 +14,21 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private int telefono;
-	
+	private String imagen;
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public Persona(int id, String nombre, String apellido, int telefono, String imagen) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.imagen = imagen;
+	}
 	public Persona() {
 		super();
 	}

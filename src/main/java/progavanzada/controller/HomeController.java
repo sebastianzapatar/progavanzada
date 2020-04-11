@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import progavanzada.model.Estudiante;
 import progavanzada.model.Persona;
 import progavanzada.service.IPersonaService;
+import util.Insertar;
 
 
 
@@ -59,14 +60,17 @@ public class HomeController {
 		return "home";
 	}
 	@PostMapping(value="/guardar")
-	public String guardar(@ModelAttribute Persona persona, BindingResult result, Model model)
+	public String guardar(Model model, @RequestParam("id") int id, @RequestParam("nombre") 
+	String nombre,	@RequestParam("apellido") String apellido, 
+	@RequestParam("telefono") int telefono, @RequestParam("imagen") MultipartFile multiPart, 
+	HttpServletRequest request)
 	{
-
-		personas.guardar(persona);
+		String nombreImagen=Insertar.guardarImagen(multiPart,request);
+		Persona w=new Persona(id,nombre,apellido,telefono,nombreImagen);
+		personas.guardar(w);
 		List<Persona> estudiantes=personas.listarpersonas();
-
 		model.addAttribute("estudiantes",estudiantes);
-		return "home"; 
+		return "home";
 	}
 	@RequestMapping(value="eliminar/{id}")
 	public String eliminar(@PathVariable("id") int id,Model model) {
