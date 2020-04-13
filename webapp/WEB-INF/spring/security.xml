@@ -6,12 +6,15 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security.xsd">
-	<http />
+	<http auto-config="true">
+		
+		<intercept-url pattern="/insertarpersona/*" access="hasAnyAuthority('EDITOR')" />
+		<intercept-url pattern="/edit/*" access="hasAnyAuthority('GERENTE')" />
+	</http>
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="luis" password="{noop}luis123"
-					authorities="EDITOR" />
+				<user name="luis" password="{noop}luis123" authorities="EDITOR" />
 				<user name="sebastian" password="{noop}elprofe123"
 					authorities="GERENTE" />
 			</user-service>
