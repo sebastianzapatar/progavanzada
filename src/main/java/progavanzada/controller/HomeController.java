@@ -6,9 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,6 +102,14 @@ public class HomeController {
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
 	}
+	@GetMapping(value="/logout")
+	public String logout(HttpServletRequest request){
+		SecurityContextLogoutHandler logoutHandler =
+				new SecurityContextLogoutHandler();
+		logoutHandler.logout(request, null, null);
+		return "redirect:/login";
+	}
+
 	public static List<Estudiante> listaEstudiantes(){
 		List<Estudiante> estudiantes=new ArrayList<Estudiante>();
 		Estudiante e1=new Estudiante("Monica", "Castaneda", "Bogota",1);

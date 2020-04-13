@@ -15,6 +15,9 @@
              
             </div>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/progavanzada/logout">Salir <span class="sr-only"></span></a>
+          </li>
         </ul>
 
       </div>
