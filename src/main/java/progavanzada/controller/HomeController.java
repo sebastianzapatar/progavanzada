@@ -3,10 +3,11 @@ package progavanzada.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.http.HttpRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.HttpServletBean;
 
 import progavanzada.model.Estudiante;
 import progavanzada.model.Persona;
+import progavanzada.model.Usuario;
 import progavanzada.service.IPersonaService;
-import util.Insertar;
+import progavanzada.service.IUserService;
 
 
 
@@ -32,6 +35,13 @@ import util.Insertar;
 public class HomeController {
 	@Autowired
 	private IPersonaService personas;
+	
+	@Autowired
+	private IUserService users1;
+	
+	
+	/*@Autowired
+	private BCryptPasswordEncoder encoder;*/
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String HomePage(Model model) {
 		List<Persona> estudiantes=personas.listarpersonas();
@@ -39,7 +49,26 @@ public class HomeController {
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
 	}
-	@RequestMapping(value="/insertarpersona")
+	@RequestMapping(value="/insertarUsuario")
+	public String insertarusuario() {
+		return "formuser";
+	}
+	@PostMapping(value="/guardaru")
+	public String guardaru(Model model, @RequestParam("id") int id, @RequestParam("username") 
+	String username,	@RequestParam("password") String password, 
+	@RequestParam("activo") int Activo)
+	{
+		
+		Usuario k=new Usuario(id,username,password, Activo);
+		//String pass=encoder.encode(password);
+		//k.setPassword(pass);
+		users1.guadar(k);
+		System.out.println(k);
+		List<Persona> estudiantes=personas.listarpersonas();
+		model.addAttribute("estudiantes",estudiantes);
+		return "home";
+	}
+	@GetMapping(value="/insertarpersona")
 	public String insertar() {
 		return "insertarpersona";
 	}
@@ -65,9 +94,9 @@ public class HomeController {
 	public String guardar(Model model, @RequestParam("id") int id, @RequestParam("nombre") 
 	String nombre,	@RequestParam("apellido") String apellido, 
 	@RequestParam("telefono") int telefono, @RequestParam("imagen") MultipartFile multiPart, 
-	HttpServletRequest request)
+	HttpRequest request)
 	{
-		String nombreImagen=Insertar.guardarImagen(multiPart,request);
+		String nombreImagen="imagen.jpg";
 		Persona w=new Persona(id,nombre,apellido,telefono,nombreImagen);
 		personas.guardar(w);
 		List<Persona> estudiantes=personas.listarpersonas();
@@ -84,7 +113,7 @@ public class HomeController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value="/edit/{id}")
+	@GetMapping(value="/edit/{id}")
 	public String editar(@PathVariable("id") int id,Model model) {
 		Persona eldato=personas.encontrarporId(id);
 		model.addAttribute("estudiante",eldato);
@@ -102,13 +131,12 @@ public class HomeController {
 		model.addAttribute("estudiantes",estudiantes);
 		return "home";
 	}
-	@GetMapping(value="/logout")
-	public String logout(HttpServletRequest request){
-		SecurityContextLogoutHandler logoutHandler =
-				new SecurityContextLogoutHandler();
-		logoutHandler.logout(request, null, null);
+	/*@GetMapping(value="/logout")
+	public String logout(HttpServletBean request){
+		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+		logoutHandler.setClearAuthentication(true);
 		return "redirect:/login";
-	}
+	}*/
 
 	public static List<Estudiante> listaEstudiantes(){
 		List<Estudiante> estudiantes=new ArrayList<Estudiante>();
