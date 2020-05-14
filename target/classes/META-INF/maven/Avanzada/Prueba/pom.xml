@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.itinajero</groupId>
-	<artifactId>cineapp</artifactId>
+	<groupId>Avanzada</groupId>
+	<artifactId>Prueba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<!-- Ultima actualizacion de las versiones (Octubre 2018) -->
@@ -40,8 +40,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.47</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/oracle/oracle-jdbc -->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-jdbc</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
 
-		
+
+
+
 	</dependencies>
 
 
