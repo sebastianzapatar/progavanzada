@@ -41,11 +41,7 @@
 			<version>5.1.47</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/oracle/oracle-jdbc -->
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>oracle-jdbc</artifactId>
-			<version>12.1.0.2</version>
-		</dependency>
+		
 
 
 
